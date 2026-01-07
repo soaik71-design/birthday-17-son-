@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday 17+</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    background:#000;
+    color:#fff;
+    text-align:center;
+    font-family:'Montserrat',sans-serif;
+    overflow:hidden;
+}
+.container{
+    max-width:420px;
+    margin:40px auto;
+    padding:20px;
+    border:2px solid #d4af37;
+    border-radius:28px;
+    box-shadow:0 0 60px rgba(212,175,55,.6);
+    background:linear-gradient(180deg,#0a0a0a,#000);
+    position:relative;
+    z-index:2;
+}
+h1{
+    font-family:'Cinzel',serif;
+    color:#d4af37;
+    letter-spacing:2px;
+}
+.avatar{
+    width:100%;
+    border-radius:22px;
+    margin:18px 0;
+    box-shadow:0 0 35px rgba(212,175,55,.6);
+}
+.name{
+    font-size:22px;
+    color:#d4af37;
+    margin-top:10px;
+}
+.msg{
+    font-size:15px;
+    line-height:1.8;
+    margin-top:10px;
+}
+button{
+    margin-top:20px;
+    padding:10px 26px;
+    border:none;
+    border-radius:25px;
+    background:#d4af37;
+    color:#000;
+    font-weight:bold;
+}
+canvas{
+    position:fixed;
+    inset:0;
+    z-index:1;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="sparkle"></canvas>
+
+<div class="container">
+    <h1>Happy Birthday 17+</h1>
+
+    <!-- 🔴 ẢNH CỦA BẠN -->
+    <img src="avatar.jpg" class="avatar">
+
+    <div class="name">Sùng Ngọc Sơn</div>
+
+    <div class="msg">
+        Chúc mừng sinh nhật bản thân tròn 17+ 🎂<br>
+        Mong tuổi mới luôn mạnh mẽ, trưởng thành,<br>
+        học tập tốt và đạt được điều mình mong muốn ✨
+    </div>
+
+    <button onclick="music.play()">🎵 Bật nhạc</button>
+</div>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7b8f1b3b4c.mp3">
+</audio>
+
+<script>
+const c=document.getElementById("sparkle");
+const x=c.getContext("2d");
+c.width=innerWidth;
+c.height=innerHeight;
+let p=[];
+setInterval(()=>p.push({
+    x:Math.random()*c.width,
+    y:Math.random()*c.height,
+    r:Math.random()*2+1,
+    l:100
+}),80);
+
+function draw(){
+    x.clearRect(0,0,c.width,c.height);
+    p.forEach((e,i)=>{
+        x.fillStyle="rgba(212,175,55,.8)";
+        x.beginPath();
+        x.arc(e.x,e.y,e.r,0,Math.PI*2);
+        x.fill();
+        e.y-=0.3;
+        e.l--;
+        if(e.l<0)p.splice(i,1);
+    });
+    requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>
